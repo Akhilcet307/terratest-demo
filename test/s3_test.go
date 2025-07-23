@@ -13,6 +13,6 @@ func TestS3BucketExists(t *testing.T) {
 	bucket := os.Getenv("BUCKET_NAME")
 	assert.NotEmpty(t, bucket, "BUCKET_NAME must be set")
 
-	exists := aws.S3BucketExists(t, region, bucket)
+	exists := aws.AssertS3BucketExists(t, region, bucket)
 	assert.True(t, exists, "Expected S3 bucket to exist")
 }
