@@ -1,1 +1,1 @@
-bucket_name = "terratest-example-bucket-12345"
+bucket_name = "terratest-example-bucket-demo-12345"
