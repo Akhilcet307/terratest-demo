@@ -13,7 +13,7 @@ func TestS3BucketCreation(t *testing.T) {
         TerraformDir: "../",
     }
 
-    defer terraform.Destroy(t, terraformOptions)
+    // defer terraform.Destroy(t, terraformOptions)
     terraform.InitAndApply(t, terraformOptions)
 
     bucketName := terraform.Output(t, terraformOptions, "bucket_name")
