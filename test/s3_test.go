@@ -1,18 +1,23 @@
 package test
 
 import (
-	"testing"
-	"os"
-
-	"github.com/gruntwork-io/terratest/modules/aws"
-	"github.com/stretchr/testify/assert"
+    "testing"
+    "github.com/gruntwork-io/terratest/modules/terraform"
+    "github.com/gruntwork-io/terratest/modules/aws"
 )
 
-func TestS3BucketExists(t *testing.T) {
-	region := "us-east-1"
-	bucket := os.Getenv("BUCKET_NAME")
-	assert.NotEmpty(t, bucket, "BUCKET_NAME must be set")
+func TestS3BucketCreation(t *testing.T) {
+    t.Parallel()
 
-	exists := aws.AssertS3BucketExists(t, region, bucket)
-	assert.True(t, exists, "Expected S3 bucket to exist")
+    terraformOptions := &terraform.Options{
+        TerraformDir: "../",
+    }
+
+    defer terraform.Destroy(t, terraformOptions)
+    terraform.InitAndApply(t, terraformOptions)
+
+    bucketName := terraform.Output(t, terraformOptions, "bucket_name")
+    region := "us-east-1"
+
+    aws.AssertS3BucketExists(t, region, bucketName)
 }
