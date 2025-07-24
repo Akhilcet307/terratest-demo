@@ -15,7 +15,7 @@ func TestS3BucketCreation(t *testing.T) {
     }
 
     // defer terraform.Destroy(t, terraformOptions)
-	if os.Getenv("SKIP_DESTROY") != "true" {
+	if os.Getenv("SKIP_TERRATEST_DESTROY") != "true" {
     defer terraform.Destroy(t, terraformOptions)
 	}
     terraform.InitAndApply(t, terraformOptions)
