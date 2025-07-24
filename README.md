@@ -5,7 +5,8 @@ This project shows how to:
 - Verify bucket creation with Terratest in Go
 
 ## Usage
-
+###
+It uses AWS Secret Key and AWS Secret Password set inside git settings
 ### Deploy S3 Bucket
 ```bash
 terraform init
